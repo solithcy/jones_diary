@@ -11,7 +11,8 @@ const router = Router();
 router.get("/me", auth, userController.me)
 router.post("/login", userController.login);
 router.post("/register", userController.register);
-// router.post("/entries", entryController.create);
+router.post("/entries", auth, entryController.create);
+router.get("/entries", auth, entryController.all);
 // router.patch("/entries/:id", entryController.authenticate);
 // router.delete("/enteries/:id", entryController.destroy);
 

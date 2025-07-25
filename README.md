@@ -27,4 +27,4 @@ You should now have a diary app available at http://localhost:5173! To test it o
 Username: default
 Password: password
 ```
-Registration will be available Soon:tm:
+Registration will be available Soon™

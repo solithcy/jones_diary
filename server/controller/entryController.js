@@ -10,14 +10,15 @@ async function index(req, res) {
     } catch (err) {
         res.status(500).json({error: err.message})
     };
-};
+}; //need to add user.id
 
 //router.get("/entries/:id", entryController.show);
 async function show(req, res) {
     try {
         const id = parseInt(req.params.id)
-        const entries = await Entry.getAllByUid(id)
-        res.status(200).json(entries)
+        const entry = await Entry.getById(id);
+        if(entry.uid !== req.user.id) throw new Error("not found");
+        res.status(200).json(entry)
     } catch (err) {
         res.status(404).json({error: err.message})
     };
@@ -57,22 +58,30 @@ async function all(req, res) {
     }
 }
 // router.patch("/entries/:id", entryController.authenticate);
-// async function update(req, res) => {
-//     try {
-//         const { id } = req.params;
-//         const { category } = req.body
-//
-//         const updateEntry = await
-//     }
-// }
+async function update (req, res) {
+    try {
+        const { id } = req.params;
+
+        const entry = await Entry.getById(id);
+        if(entry.uid !== req.user.id) throw new Error("not found");
+        const updateEntry = await entry.updateEntry(req.body);
+        if (!updateEntry) {
+            return res.status(404).json({error: 'Entry not found'})
+        }
+        res.json(updateEntry);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({error: err.message})
+    }
+}
 
 
 // router.delete("/entries/:id", entryController.destroy);
 async function destroy(req, res){
     try {
         const id = parseInt(req.params.id)
-        const entry = await Entry.getAllByUid(uid)
-        const result = await entry.destroy()
+        const entry = await Entry.getById(id)
+        const result = await entry.deleteEntry();
         res.status(200).json(result)
     } catch (err) {
         res.status(404).json({error: err.message})
@@ -80,5 +89,5 @@ async function destroy(req, res){
 };
 
 module.exports = {
-    index, show, date, create, destroy, all
+    index, show, date, create, destroy, all, update,
 }

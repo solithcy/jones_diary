@@ -11,7 +11,15 @@ declare global {
 			username: string;
 			token?: string;
 		}
-		// interface PageData {}
+		interface Entry{
+			id: number;
+			content: string;
+			category?: string;
+			created: Date;
+		}
+		interface PageData {
+			user?: User;
+		}
 		// interface PageState {}
 		// interface Platform {}
 	}

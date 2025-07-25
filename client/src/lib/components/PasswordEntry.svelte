@@ -7,8 +7,8 @@
   let shown = false;
 </script>
 
-<div class="pswd-cont">
-  <input type={shown ? "password" : "text"} class={($$props.class || '') + " pswd"} {placeholder} {name} {autocomplete}>
+<div class="glass-cont">
+  <input type={shown ? "password" : "text"} class={($$props.class || '') + " in-glass"} {placeholder} {name} {autocomplete}>
   <button onclick={()=>{shown = !shown}} class="mr-3 opacity-50 cursor-pointer duration-300 hover:opacity-75">
     <Fa icon={shown ? faEyeSlash : faEye}/>
   </button>

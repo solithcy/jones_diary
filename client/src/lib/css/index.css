@@ -6,8 +6,7 @@
 }
 
 html, body{
-  min-height: 100%;
-  height: 100%;
+  min-height: 100vh;
   user-select: none;
 }
 
@@ -22,7 +21,7 @@ main{
   color: #F8F8FF;
 }
 
-.diary-cont, .btn, input:not(.pswd), .pswd-cont{
+.diary-cont, .btn, input:not(.in-glass), .glass-cont{
   background: rgba(255, 255, 255, 0.19);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5px);
@@ -43,6 +42,27 @@ input:focus-visible, textarea:focus-visible{
   @apply p-3 rounded-xl cursor-pointer duration-400;
 }
 
-.pswd-cont{
+.glass-cont{
   @apply rounded-xl gap-3 flex flex-row;
+}
+
+.glass-cont.glass-cont-sm{
+  @apply rounded-full;
+}
+
+.glass-cont-sm input{
+  @apply p-1;
+}
+
+.entry{
+  @apply py-2;
+}
+
+.entry .entry-content{
+  @apply whitespace-pre-line;
+}
+
+.entry .entry-content::first-letter {
+  @apply font-title uppercase;
+  initial-letter: 2 1;
 }

@@ -10,7 +10,7 @@ async function index(req, res) {
     } catch (err) {
         res.status(500).json({error: err.message})
     };
-};
+}; //need to add user.id
 
 //router.get("/entries/:id", entryController.show);
 async function show(req, res) {
@@ -57,9 +57,16 @@ async function all(req, res) {
 async function update(req, res) => {
     try {
         const { id } = req.params;
-        const { category } = req.body
+        const { category } = req.body.user.id
 
-        const updateEntry = await
+        const updateEntry = await Entry.updateEntry(id, {content, category})
+        if (!updateEntry) {
+            return res.status(404).json({error: 'Entry not found'})
+        }
+        res.json(updateEntry);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({error: err.message})
     }
 }
 

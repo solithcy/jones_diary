@@ -16,7 +16,7 @@ async function index(req, res) {
 async function show(req, res) {
     try {
         const id = parseInt(req.params.id)
-        const enteries = await Entry.getAllByUid(id)
+        const entries = await Entry.getAllByUid(id)
         res.status(200).json(entries)
     } catch (err) {
         res.status(404).json({error: err.message})
@@ -27,8 +27,8 @@ async function show(req, res) {
 async function date(req, res) {
     try{
         const date = parseInt(req.params.date)
-        const enteries = await Entry.getEntryByDate(date)
-        res.status(200).json(enteries)
+        const entries = await Entry.getEntryByDate(date)
+        res.status(200).json(entries)
     } catch (err) {
         res.status(500).json({error: err.message})
     };
@@ -64,7 +64,7 @@ async function update(req, res) => {
 }
 
 
-// router.delete("/enteries/:id", entryController.destroy);
+// router.delete("/entries/:id", entryController.destroy);
 async function destroy(req, res){
     try {
         const id = parseInt(req.params.id)

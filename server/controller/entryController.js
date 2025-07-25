@@ -57,14 +57,14 @@ async function all(req, res) {
     }
 }
 // router.patch("/entries/:id", entryController.authenticate);
-async function update(req, res) => {
-    try {
-        const { id } = req.params;
-        const { category } = req.body
-
-        const updateEntry = await
-    }
-}
+// async function update(req, res) => {
+//     try {
+//         const { id } = req.params;
+//         const { category } = req.body
+//
+//         const updateEntry = await
+//     }
+// }
 
 
 // router.delete("/entries/:id", entryController.destroy);

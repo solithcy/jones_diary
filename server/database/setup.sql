@@ -1,12 +1,15 @@
+DROP TABLE IF EXISTS entries;
+DROP TABLE IF EXISTS users;
+
 CREATE TABLE users(
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    username TEXT NOT NULL,
+    username TEXT NOT NULL UNIQUE,
     password TEXT NOT NULL
 );
 
 CREATE TABLE entries(
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    uid TEXT NOT NULL,
+    uid INT NOT NULL,
     content TEXT NOT NULL,
     category TEXT,
     created TIMESTAMP NOT NULL,

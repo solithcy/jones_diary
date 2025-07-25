@@ -11,7 +11,12 @@ router.get("/date/:date", entryController.date);
 router.get("/me", auth, userController.me)
 router.post("/login", userController.login);
 router.post("/register", userController.register);
+<<<<<<< HEAD
 router.post("/entries", entryController.create);
+=======
+router.post("/entries", auth, entryController.create);
+router.get("/entries", auth, entryController.all);
+>>>>>>> 3d9c90f7342cfc679c3b0972805426fedb9b6584
 // router.patch("/entries/:id", entryController.authenticate);
 router.delete("/enteries/:id", entryController.destroy);
 

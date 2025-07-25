@@ -30,8 +30,8 @@ class Entry {
         return result.rows.map(u => new Entry(u))
     }
 
-    static async createEntry({content, category, date}) {
-        const result = await db.query("INSERT INTO entries (content, category, date) VALUES ($1, $2, $3) RETURNING *", [content, category, date])
+    static async createEntry({content, category, date, uid}) {
+        const result = await db.query("INSERT INTO entries (content, category, created, uid) VALUES ($1, $2, $3, $4) RETURNING *", [content, category, date, uid])
         return result.rows[0];
     }
 

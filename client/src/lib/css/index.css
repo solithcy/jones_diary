@@ -1,0 +1,48 @@
+@import "./font.css";
+@import "tailwindcss";
+@theme{
+  --font-title: "Limelight", sans-serif;
+  --font-sans: "Be Vietnam Pro", sans-serif;
+}
+
+html, body{
+  min-height: 100%;
+  height: 100%;
+  user-select: none;
+}
+
+main{
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='4.5' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' fill='white' opacity='0.8'/%3E%3C/svg%3E"),
+  radial-gradient(circle at 27% 78%, #f26d48, transparent 60%),
+  radial-gradient(circle at 57% 42%, #5430b5, transparent 78%),
+  radial-gradient(circle at 68% 42%, #bd3528, transparent 50%),
+  linear-gradient(56deg, #f26d48, #5430b5, #bd3528);
+  background-blend-mode: overlay, normal, normal, normal;
+
+  color: #F8F8FF;
+}
+
+.diary-cont, .btn, input:not(.pswd), .pswd-cont{
+  background: rgba(255, 255, 255, 0.19);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+input, textarea{
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+}
+
+input:focus-visible, textarea:focus-visible{
+  outline: none;
+}
+
+.btn{
+  @apply p-3 rounded-xl cursor-pointer duration-400;
+}
+
+.pswd-cont{
+  @apply rounded-xl gap-3 flex flex-row;
+}

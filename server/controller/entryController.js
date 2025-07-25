@@ -37,7 +37,7 @@ async function date(req, res) {
 // router.post("/entries", entryController.create);
 async function create(req, res) {
     try {
-        const entry = await Entry.create(req.content)
+        const entry = await Entry.createEntry(req.content)
         res.status(200).json(entry)
     } catch (err) {
         res.status(400).json({error: err.message})
@@ -54,6 +54,14 @@ async function all(req, res) {
     }
 }
 // router.patch("/entries/:id", entryController.authenticate);
+async function update(req, res) => {
+    try {
+        const { id } = req.params;
+        const { category } = req.body
+
+        const updateEntry = await
+    }
+}
 
 
 // router.delete("/enteries/:id", entryController.destroy);

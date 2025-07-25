@@ -13,7 +13,7 @@ router.post("/login", userController.login);
 router.post("/register", userController.register);
 router.post("/entries", auth, entryController.create);
 router.get("/entries", auth, entryController.all);
-// router.patch("/entries/:id", auth, entryController.authenticate);
+router.patch("/entries/:id", auth, entryController.update);
 router.delete("/enteries/:id", auth, entryController.destroy);
 
 module.exports = router;

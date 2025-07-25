@@ -30,6 +30,17 @@ export const getEntries = async (fetchOverride?: typeof fetch): Promise<App.Entr
   });
 }
 
+export const getEntriesInCat = async (cat: string, fetchOverride?: typeof fetch): Promise<App.Entry[]> => {
+  return (fetchOverride || fetch)(API_URL + "/category/" + encodeURIComponent(cat), {
+    credentials: "include",
+  }).then(r=>r.json()).then(r=>{
+    return r.map((e: App.Entry)=>({
+      ...e,
+      created: new Date(e.created)
+    }));
+  });
+}
+
 export const createEntry = async (content: string, category: string, created: string): Promise<App.Entry> => {
   return fetch(API_URL + "/entries", {
     credentials: "include",
@@ -43,9 +54,25 @@ export const createEntry = async (content: string, category: string, created: st
   }).then(r=>r.json());
 }
 
-
-export const getEntry = async (id: string): Promise<App.Entry | undefined> => {
-  return fetch(API_URL + "/entry/" + id, {
+export const updateEntry = async (id: string, content: string, category: string, created: string): Promise<App.Entry> => {
+  return fetch(API_URL + "/entries/" + id, {
     credentials: "include",
-  }).then(r=>r.json()).then(r=>r?.id ? r : undefined);
+    method: "PATCH",
+    headers: {
+      "content-type": "application/json"
+    },
+    body: JSON.stringify({
+      content, category, date: created
+    })
+  }).then(r=>r.json());
+}
+
+
+export const getEntry = async (id: string, fetchOverride: typeof fetch): Promise<App.Entry | undefined> => {
+  return (fetchOverride || fetch)(API_URL + "/entries/" + id, {
+    credentials: "include",
+  }).then(r=>r.json()).then(r=>r?.id ? {
+    ...r,
+    created: new Date(r.created)
+  } : undefined);
 }

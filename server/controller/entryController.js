@@ -5,8 +5,8 @@ const Entry = require("../model/entryModel");
 //router.get("/category/:name", entryController.index);
 async function index(req, res) {
     try{
-        const entries = await Entry.getAllByUid();
-        res.status(200).json(entries)
+        const entries = await Entry.getEntryByCategory(req.params.name);
+        res.status(200).json(entries.filter(e=>e.uid===req.user.id));
     } catch (err) {
         res.status(500).json({error: err.message})
     };

@@ -23,12 +23,12 @@
       <a href="/"><Fa icon={faAddressBook} size="lg"/></a>
     </div>
     {#if !["/login", "/register"].includes(page.url.pathname) && !!$user}
-      <div class="hidden md:block mx-auto pl-8">
+      <div class="hidden md:block mx-auto ">
         <Search/>
       </div>
-      <div class="ml-auto md:ml-0 text-2xl opacity-90">
-        <a href="/calendar"><Fa icon={faCalendar}/></a>
-      </div>
+<!--      <div class="ml-auto md:ml-0 text-2xl opacity-90">-->
+<!--        <a href="/calendar"><Fa icon={faCalendar}/></a>-->
+<!--      </div>-->
       <div class="text-2xl opacity-90">
         <a href="/write"><Fa icon={faFeatherPointed}/></a>
       </div>

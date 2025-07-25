@@ -5,7 +5,7 @@ const userController = require("../controller/userController");
 const auth = require("../middleware/auth");
 const router = Router();
 
-router.get("/category/:name", entryController.index);
+router.get("/category/:name", auth, entryController.index);
 router.get("/entries/:id", auth, entryController.show);
 router.get("/date/:date", auth, entryController.date);
 router.get("/me", auth, userController.me)

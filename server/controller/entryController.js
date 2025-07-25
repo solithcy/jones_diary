@@ -37,7 +37,10 @@ async function date(req, res) {
 // router.post("/entries", entryController.create);
 async function create(req, res) {
     try {
-        const entry = await Entry.createEntry(req.content)
+        const entry = await Entry.createEntry({
+            ...req.body,
+            uid: req.user.id,
+        })
         res.status(200).json(entry)
     } catch (err) {
         res.status(400).json({error: err.message})

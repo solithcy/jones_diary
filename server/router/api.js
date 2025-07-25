@@ -4,9 +4,9 @@ const entryController = require("../controller/entryController");
 const userController = require("../controller/userController");
 const router = Router();
 
-// router.get("/category/:name", entryController.index);
-// router.get("/entries/:id", entryController.show);
-// router.get("/date/:date", entryController.date);
+router.get("/category/:name", entryController.index);
+router.get("/entries/:id", entryController.show);
+router.get("/date/:date", entryController.date);
 router.get("/me", userController.me)
 router.post("/login", userController.login);
 router.post("/register", userController.register);

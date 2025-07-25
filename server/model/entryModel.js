@@ -25,6 +25,14 @@ class Entry {
         return getUid
     }
 
+    static async getById(id){
+        const response = await db.query("SELECT * FROM entries WHERE id = $1", [id])
+        if (response.rows.length === 0) {
+            throw new Error("not found");
+        }
+        return new Entry(response.rows[0])
+    }
+
     static async getEntryByDate(date) {
         const result = await db.query("SELECT * FROM entries WHERE created::date = $1 ORDER BY created DESC",[date])
         return result.rows.map(u => new Entry(u))
@@ -32,18 +40,18 @@ class Entry {
 
     static async createEntry({content, category, date, uid}) {
         const result = await db.query("INSERT INTO entries (content, category, created, uid) VALUES ($1, $2, $3, $4) RETURNING *", [content, category, date, uid])
-        return result.rows[0];
+        return new Entry(result.rows[0]);
     }
 
     async updateEntry({content, category}) {
         const result = await db.query(
-            "UPDATE entries SET content = $1, category = $2 WHERE id = $3 RETURNING *")
-        return result.rows[0]
+            "UPDATE entries SET content = $1, category = $2 WHERE id = $3 RETURNING *", [content, category, this.id])
+        return new Entry(result.rows[0]);
     }
 
-    async deleteEntry(id){
-        const result = await db.query("DELETE FROM entries WHERE id = $1 RETURNING *", [id])
-        return result.rows[0]
+    async deleteEntry(){
+        const result = await db.query("DELETE FROM entries WHERE id = $1 RETURNING *", [this.id])
+        return new Entry(result.rows[0])
     }
 }
 

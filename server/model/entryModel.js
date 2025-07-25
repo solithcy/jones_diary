@@ -47,10 +47,4 @@ class Entry {
     }
 }
 
-module.exports = {
-    getEntryByCategory,
-    getAllByUid,
-    getEntryByDate,
-    updateEntry,
-    deleteEntry
-};
+module.exports = Entry

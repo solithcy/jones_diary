@@ -1,6 +1,7 @@
 const Entry = require("../model/entryModel");
 
 
+
 //router.get("/category/:name", entryController.index);
 async function index(req, res) {
     try{ 
@@ -29,15 +30,34 @@ async function date(req, res) {
         const enteries = await Entry.getEntryByDate(date)
         res.status(200).json(enteries)
     } catch (err) {
-        res.status(500).json({err: error.message})
+        res.status(500).json({error: err.message})
     };
 };
 
-//router.get("/me", userController.me)
-//router.post("/login", userController.login);
-//router.post("/register", userController.register);
 // router.post("/entries", entryController.create);
-
+async function create(req, res) {
+    try {
+        const entry = await Entry.create(req.content)
+        res.status(200).json(entry)
+    } catch (err) {
+        res.status(404).json({error: err.message})
+    }
+}
 // router.patch("/entries/:id", entryController.authenticate);
-// router.delete("/enteries/:id", entryController.destroy);
 
+
+// router.delete("/enteries/:id", entryController.destroy);
+async function destroy(req, res){
+    try {
+        const id = parseInt(req.params.id)
+        const entry = await Entry.getAllByUid(uid)
+        const result = await entry.destroy()
+        res.status(200).json(result)
+    } catch (err) {
+        res.status(404).json({error: err.message})
+    };
+};
+
+module.export = {
+    index, show, date, create, destroy
+}

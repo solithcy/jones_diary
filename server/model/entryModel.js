@@ -1,4 +1,4 @@
-const db = require('../database/......')
+const db = require('../database/connect.js')
 
 class Entry {
 
@@ -10,7 +10,12 @@ class Entry {
         this.timestamp = timestamp 
     }
 
-    static async getAllByUid(uid) {
+    async getEntryByCategory(cat) {
+        const result = await db.query("SELECT * FROM entries WHERE category = $1", [cat])
+        return result.rows
+    }
+
+    async getAllByUid(uid) {
         const response = await db.query("SELECT * FROM entries WHERE uid = $1", [uid])
 
         if (response.rows.length === 0) {
@@ -20,5 +25,12 @@ class Entry {
         return getUid
     }
 
-    static 
+    async getEntryByDate(date) {
+        const result = await db.query("SELECT * FROM entries WHERE created::date = $1 ORDER BY created DESC",[date])
+        return result.rows
+    }
+
+    //async createEntry({content, category, date})
+
+    
 }

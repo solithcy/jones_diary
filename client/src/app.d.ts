@@ -9,6 +9,7 @@ declare global {
 		interface User{
 			id: number;
 			username: string;
+			token?: string;
 		}
 		// interface PageData {}
 		// interface PageState {}

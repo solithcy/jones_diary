@@ -2,7 +2,7 @@
   import PasswordEntry from "$lib/components/PasswordEntry.svelte";
   import {login} from "$lib/api.js";
   import {getContext} from "svelte";
-  import {goto} from "$app/navigation";
+  import {goto, invalidateAll} from "$app/navigation";
 
   const userStore = getContext("user");
   let error = "";
@@ -18,6 +18,7 @@
   if(user === undefined) return error = "Incorrect username or password";
   if(user.token) window.document.cookie = `token=${user.token};${new Date(Date.now() + (1000 * 60 * 60 * 24 * 6.9))};path=/`;
   userStore.set(user);
+  await invalidateAll();
   goto("/");
 }} class="flex flex-col items-center gap-2 max-w-md mx-auto text-lg">
   <input type="text" class="w-full" placeholder="Username" name="username" autocomplete="username">

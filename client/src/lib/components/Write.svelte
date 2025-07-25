@@ -16,8 +16,8 @@
   const category = form.get("category") || "";
 
   if(edit && !!entry){
-    await invalidateAll();
     await updateEntry(entry.id, content.toString(), category.toString(), created.toString());
+    await invalidateAll();
     goto(`/entry/${entry.id}`)
   }else{
     const newEntry = await createEntry(content.toString(), category.toString(), created.toString());
